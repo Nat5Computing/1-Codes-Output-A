@@ -1,15 +1,21 @@
 import subprocess
 
 def test_output():
-    result = subprocess.run(["python3", "main.py"], capture_output=True, text=True)
-    output_lines = result.stdout.strip().split('\n')
+    try:
+        result = subprocess.run(["python3", "main.py"], capture_output=True, text=True)
+        output_lines = result.stdout.strip().split('\n')
+    except Exception as e:
+        print("❌ Your code could not be run. Make sure there are no errors in main.py.")
+        print(f"Error: {e}")
+        return
 
-    # Store pass/fail results
     passed = 0
     total = 5
 
     if len(output_lines) < 5:
-        print(f"⚠️ Only {len(output_lines)} line(s) printed. 5 expected.\n")
+        print(f"⚠️ Only {len(output_lines)} line(s) printed. 5 expected.")
+        print("💡 This usually means your program crashed before finishing.")
+        print("🔍 Tip: Check for missing quotation marks, brackets, or other typos in your print statements.\n")
 
     # Line 1
     try:
@@ -55,6 +61,7 @@ def test_output():
     except:
         print("❌ Line 5 should mention 'Mistakes' and 'trying'.")
 
+    # Summary
     print(f"\n🎯 You got {passed} out of {total} lines correct.")
 
     if passed == total:
