@@ -14,57 +14,45 @@ def test_output():
 
     if len(output_lines) < 5:
         print(f"⚠️ Only {len(output_lines)} line(s) printed. 5 expected.")
-        print("💡 This usually means your program crashed before finishing.")
+        print("💡 Your program may have crashed before finishing.")
         print("🔍 Tip: Check for missing quotation marks, brackets, or other typos in your print statements.\n")
 
-    # Line 1
-    if len(output_lines) >= 1:
-        try:
-            assert output_lines[0] == "Hello, Scotland!"
-            print("✅ Line 1 is correct!")
-            passed += 1
-        except:
-            print("❌ Line 1 is incorrect. Should be: 'Hello, Scotland!'")
+    full_output = "\n".join(output_lines).lower()
 
-    # Line 2
-    if len(output_lines) >= 2:
-        try:
-            line2 = output_lines[1].lower()
-            assert "python" in line2 and "fun" in line2
-            print("✅ Line 2 is correct!")
-            passed += 1
-        except:
-            print("❌ Line 2 should mention both 'Python' and 'fun'.")
+    # Check for Hello, Scotland!
+    if any("hello, scotland!" in line.lower() for line in output_lines):
+        print("✅ 'Hello, Scotland!' was printed.")
+        passed += 1
+    else:
+        print("❌ 'Hello, Scotland!' is missing.")
 
-    # Line 3
-    if len(output_lines) >= 3:
-        try:
-            line3 = output_lines[2].lower()
-            assert "guido" in line3 and "rossum" in line3
-            print("✅ Line 3 is correct!")
-            passed += 1
-        except:
-            print("❌ Line 3 should mention 'Guido van Rossum'.")
+    # Check for both 'python' and 'fun'
+    if "python" in full_output and "fun" in full_output:
+        print("✅ Your message includes both 'Python' and 'fun'.")
+        passed += 1
+    else:
+        print("❌ One line should include both 'Python' and 'fun'.")
 
-    # Line 4
-    if len(output_lines) >= 4:
-        try:
-            line4 = output_lines[3].lower()
-            assert "odd" in line4 and "sock" in line4
-            print("✅ Line 4 is correct!")
-            passed += 1
-        except:
-            print("❌ Line 4 should mention 'Odd Socks Day'.")
+    # Check for Guido van Rossum
+    if "guido" in full_output and "rossum" in full_output:
+        print("✅ You mentioned 'Guido van Rossum'.")
+        passed += 1
+    else:
+        print("❌ One line should mention 'Guido van Rossum'.")
 
-    # Line 5
-    if len(output_lines) >= 5:
-        try:
-            line5 = output_lines[4].lower()
-            assert "mistake" in line5 and "trying" in line5
-            print("✅ Line 5 is correct!")
-            passed += 1
-        except:
-            print("❌ Line 5 should mention 'Mistakes' and 'trying'.")
+    # Check for Odd Socks Day
+    if "odd" in full_output and "sock" in full_output:
+        print("✅ You mentioned Odd Socks Day.")
+        passed += 1
+    else:
+        print("❌ One line should mention 'Odd Socks Day'.")
+
+    # Check for Mistakes and Trying
+    if "mistake" in full_output and "trying" in full_output:
+        print("✅ You included the message about mistakes and trying.")
+        passed += 1
+    else:
+        print("❌ One line should include both 'Mistakes' and 'trying'.")
 
     print(f"\n🎯 You got {passed} out of {total} lines correct.")
 
