@@ -4,30 +4,35 @@ def test_output():
     print("\n🖨️ Running your program...\n")
 
     try:
-        result = subprocess.run(["python3", "main.py"], capture_output=True, text=True)
-        output = result.stdout.strip()
-        output_lines = output.split('\n')
+        result = subprocess.run(["python3", "main.py"], capture_output=True, text=True, timeout=5)
+        if result.returncode != 0:
+            print("❌ Your program had an error and couldn't run properly.")
+            print("🔧 Error message:\n" + result.stderr.strip())
+            print("\n💡 Fix the error in your code before checking the print statements.")
+            return
     except Exception as e:
-        print("❌ Your code could not be run. Make sure there are no errors in main.py.")
+        print("❌ Something went wrong when running your code.")
         print(f"Error: {e}")
         return
 
-    # 🔍 Show what was printed
+    output = result.stdout.strip()
+    output_lines = output.split('\n')
+
+    # Show actual output
     print("📄 Your program printed:")
-    if output_lines == ['']:
+    if not output.strip():
         print("(nothing)")
     else:
         for i, line in enumerate(output_lines):
             print(f"{i+1}: {line}")
     print("")
 
-    # 🔍 Searchable full output
+    # Now begin checking for expected content
     full_output = "\n".join(output_lines).lower()
 
     passed = 0
     total = 5
 
-    # Check each message independently
     if any("hello, scotland!" in line.lower() for line in output_lines):
         print("✅ 'Hello, Scotland!' was printed.")
         passed += 1
@@ -58,7 +63,6 @@ def test_output():
     else:
         print("❌ One line should include both 'Mistakes' and 'trying'.")
 
-    # Summary
     print(f"\n🎯 You got {passed} out of {total} correct.")
 
     if passed == total:
