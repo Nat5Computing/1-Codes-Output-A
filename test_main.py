@@ -18,50 +18,54 @@ def test_output():
         print("🔍 Tip: Check for missing quotation marks, brackets, or other typos in your print statements.\n")
 
     # Line 1
-    try:
-        assert output_lines[0] == "Hello, Scotland!"
-        print("✅ Line 1 is correct!")
-        passed += 1
-    except:
-        print("❌ Line 1 is incorrect. Should be: 'Hello, Scotland!'")
+    if len(output_lines) >= 1:
+        try:
+            assert output_lines[0] == "Hello, Scotland!"
+            print("✅ Line 1 is correct!")
+            passed += 1
+        except:
+            print("❌ Line 1 is incorrect. Should be: 'Hello, Scotland!'")
 
     # Line 2
-    try:
-        line2 = output_lines[1].lower()
-        assert "python" in line2 and "fun" in line2
-        print("✅ Line 2 is correct!")
-        passed += 1
-    except:
-        print("❌ Line 2 should mention both 'Python' and 'fun'.")
+    if len(output_lines) >= 2:
+        try:
+            line2 = output_lines[1].lower()
+            assert "python" in line2 and "fun" in line2
+            print("✅ Line 2 is correct!")
+            passed += 1
+        except:
+            print("❌ Line 2 should mention both 'Python' and 'fun'.")
 
     # Line 3
-    try:
-        line3 = output_lines[2].lower()
-        assert "guido" in line3 and "rossum" in line3
-        print("✅ Line 3 is correct!")
-        passed += 1
-    except:
-        print("❌ Line 3 should mention 'Guido van Rossum'.")
+    if len(output_lines) >= 3:
+        try:
+            line3 = output_lines[2].lower()
+            assert "guido" in line3 and "rossum" in line3
+            print("✅ Line 3 is correct!")
+            passed += 1
+        except:
+            print("❌ Line 3 should mention 'Guido van Rossum'.")
 
     # Line 4
-    try:
-        line4 = output_lines[3].lower()
-        assert "odd" in line4 and "sock" in line4
-        print("✅ Line 4 is correct!")
-        passed += 1
-    except:
-        print("❌ Line 4 should mention 'Odd Socks Day'.")
+    if len(output_lines) >= 4:
+        try:
+            line4 = output_lines[3].lower()
+            assert "odd" in line4 and "sock" in line4
+            print("✅ Line 4 is correct!")
+            passed += 1
+        except:
+            print("❌ Line 4 should mention 'Odd Socks Day'.")
 
     # Line 5
-    try:
-        line5 = output_lines[4].lower()
-        assert "mistake" in line5 and "trying" in line5
-        print("✅ Line 5 is correct!")
-        passed += 1
-    except:
-        print("❌ Line 5 should mention 'Mistakes' and 'trying'.")
+    if len(output_lines) >= 5:
+        try:
+            line5 = output_lines[4].lower()
+            assert "mistake" in line5 and "trying" in line5
+            print("✅ Line 5 is correct!")
+            passed += 1
+        except:
+            print("❌ Line 5 should mention 'Mistakes' and 'trying'.")
 
-    # Summary
     print(f"\n🎯 You got {passed} out of {total} lines correct.")
 
     if passed == total:
